@@ -2,6 +2,7 @@ from aiohttp_apispec import setup_aiohttp_apispec
 from typing import Optional
 from aiohttp.web import Application as AiohttpApplication, run_app as aiohttp_run_app, View as AiohttpView, \
     Request as AiohttpRequest
+from app.web.config import setup_config
 
 from app.web.routes import setup_routes
 from app.store import setup_accessors
@@ -26,6 +27,7 @@ app = Application()
 
 
 def run_app():
+    setup_config(app)
     setup_routes(app)
     setup_aiohttp_apispec(app, title='CRM Application', url='/docs/json', swagger_path='/docs')
     setup_middlewares(app)
